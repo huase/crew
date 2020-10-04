@@ -9,7 +9,9 @@
     "prettier": "prettier --loglevel error --write './src/**/*.ts'",
     "lint": "tslint -c ./tslint.json --project tsconfig.json --fix",
     "build": "npm run transpile && npm run prettier && npm run lint",
-    "start": "npm run build && node lib/index.js"
+    "start": "npm run build && node lib/index.js",
+    "transpile-windows": "rd -r lib && tsc --pretty",
+    "start-windows": "npm run transpile-windows && npm run prettier && npm run lint"
   },
   "repository": {
     "type": "git",
