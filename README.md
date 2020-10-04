@@ -4,6 +4,7 @@
 
 ## Setup
 
+- <a href='https://brew.sh/'>Install Homebrew</a>
 - Run `brew install npm` to install `npm`
 - Run `git clone git@github.com:huase/crew.git`
 - Once cloned, run `cd crew/`
