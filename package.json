@@ -8,7 +8,8 @@
     "transpile": "rm -rf lib && tsc --pretty",
     "prettier": "prettier --loglevel error --write './src/**/*.ts'",
     "lint": "tslint -c ./tslint.json --project tsconfig.json --fix",
-    "build": "npm run transpile && npm run prettier && npm run lint"
+    "build": "npm run transpile && npm run prettier && npm run lint",
+    "start": "npm run build && node lib/index.js"
   },
   "repository": {
     "type": "git",
