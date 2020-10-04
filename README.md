@@ -1,6 +1,6 @@
 # crew
 
-[Rules of the game](#https://www.ultraboardgames.com/the-crew/game-rules.php?fbclid=IwAR1yvUP_Ih2lN4K72kViTF0Gd61hDq4sDZCPO5yEUWFPwmZXN8zOehwl2T4)
+<a href='https://www.ultraboardgames.com/the-crew/game-rules.php?fbclid=IwAR1yvUP_Ih2lN4K72kViTF0Gd61hDq4sDZCPO5yEUWFPwmZXN8zOehwl2T4'>Game Rules</a>
 
 ## Setup
 
