@@ -13,7 +13,6 @@
 
 ## Setup
 
-- 
 - Run `git clone git@github.com:huase/crew.git`
 - Once cloned, run `cd crew/`
 - Run `npm install`
