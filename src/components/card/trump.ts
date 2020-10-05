@@ -1,9 +1,5 @@
-type TrumpValue =
-    | 1
-    | 2
-    | 3
-    | 4;
+type TrumpValue = 1 | 2 | 3 | 4;
 
 export interface TrumpCard {
-    value: TrumpValue;
+  value: TrumpValue;
 }
