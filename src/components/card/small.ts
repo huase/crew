@@ -1,4 +1,4 @@
-import { BaseCard } from "components/card/base";
+import { BaseCard } from "./base";
 
 export interface SmallCard {
   card: BaseCard;
