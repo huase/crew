@@ -1,8 +1,10 @@
-import { Clue } from "./base";
+import { Player } from "components/player/player";
 
-type TrumpValue = 1 | 2 | 3 | 4;
+import { CardState, Clue, TrumpValue } from "./types";
 
 export interface TrumpCard {
-  value: TrumpValue;
+  readonly value: TrumpValue;
+  owner: Player;
+  state: CardState;
   clue?: Clue;
 }

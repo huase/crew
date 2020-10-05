@@ -2,8 +2,10 @@ import { PlayCard } from "components/card/play";
 import { TrumpCard } from "components/card/trump";
 import { Player } from "components/player/player";
 
+import { Round } from "./types";
+
 export interface Trick {
-  round: number;
+  round: Round;
   cards: (PlayCard | TrumpCard)[];
 }
 

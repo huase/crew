@@ -1,12 +1,7 @@
 import { Player } from "components/player/player";
 
 import { Mission } from "./mission";
-
-enum GameState {
-  Success,
-  Failure,
-  InProgress,
-}
+import { GameState } from "./types";
 
 export interface Board {
   players: Player[];

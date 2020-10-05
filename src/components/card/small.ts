@@ -1,5 +1,6 @@
-import { BaseCard } from "./base";
+import { CardValue, Suit } from "./types";
 
 export interface SmallCard {
-  card: BaseCard;
+  readonly value: CardValue;
+  readonly suit: Suit;
 }
