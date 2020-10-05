@@ -10,9 +10,9 @@ export enum Suit {
 }
 
 export enum Clue {
-    High,
-    Low,
-    Only,
+  High,
+  Low,
+  Only,
 }
 
 export interface BaseCard {

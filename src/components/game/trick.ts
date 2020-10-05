@@ -3,7 +3,7 @@ import { TrumpCard } from "components/card/trump";
 import { Player } from "components/player/player";
 
 export interface Trick {
-    round: number;
+  round: number;
   cards: (PlayCard | TrumpCard)[];
 }
 
