@@ -1,4 +1,4 @@
-import { PlayCard, Suit } from "components/card/types";
+import { PlayCard, Suit } from "components/deck/types";
 import { Player } from "components/player/player";
 
 import { Round } from "./types";

@@ -1,4 +1,4 @@
-import { SmallCard } from "components/card/small";
+import { SmallCard } from "components/deck/small";
 import { Player } from "components/player/player";
 
 import { TaskToken } from "./token";

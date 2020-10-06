@@ -1,4 +1,4 @@
-import { PlayCard } from "components/card/types";
+import { PlayCard } from "components/deck/types";
 
 import { Player } from "./player";
 

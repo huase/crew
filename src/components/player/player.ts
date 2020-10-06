@@ -1,4 +1,4 @@
-import { PlayCard } from "components/card/types";
+import { PlayCard } from "components/deck/types";
 import { Board } from "components/game/board";
 import { Task } from "components/game/task";
 import { Trick } from "components/game/trick";

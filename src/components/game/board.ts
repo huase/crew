@@ -1,4 +1,4 @@
-import { PlayCard } from "components/card/types";
+import { Card } from "components/deck/types";
 import { Player } from "components/player/player";
 
 import { Mission } from "./mission";
@@ -12,10 +12,10 @@ export interface Board {
   currentTrick: Trick;
 }
 
-export const shufflePlayCards = (deck: PlayCard[]): void => {
+export const shufflePlayCards = (deck: Card[]): void => {
   for (let index = 0; index < deck.length; index++) {
     const k: number = Math.floor(Math.random() * (index + 1)); //generate random number between 0 and index, inclusive
-    const temp: PlayCard = deck[k];
+    const temp: Card = deck[k];
     deck[k] = deck[index];
     deck[index] = temp;
   }
