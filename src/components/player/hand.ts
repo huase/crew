@@ -1,9 +1,8 @@
-import { PlayCard } from "components/card/play";
-import { TrumpCard } from "components/card/trump";
+import { PlayCard } from "components/card/types";
 
 import { Player } from "./player";
 
 export interface Hand {
   player: Player;
-  cards: (PlayCard | TrumpCard)[];
+  cards: PlayCard[];
 }

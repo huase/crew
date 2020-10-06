@@ -1,3 +1,5 @@
+import { PlayCard } from "components/card/types";
+import { Board } from "components/game/board";
 import { Task } from "components/game/task";
 import { Trick } from "components/game/trick";
 
@@ -9,3 +11,9 @@ export interface Player {
   tricks: Trick[];
   tasks: Task[];
 }
+
+export const getPlayableCards = (board: Board, player: Player): PlayCard => {
+  console.log(board);
+  console.log(player);
+  throw new Error("Not implemented");
+};

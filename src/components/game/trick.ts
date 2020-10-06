@@ -1,17 +1,15 @@
-import { PlayCard } from "components/card/play";
-import { TrumpCard } from "components/card/trump";
-import { Suit } from "components/card/types";
+import { PlayCard, Suit } from "components/card/types";
 import { Player } from "components/player/player";
 
 import { Round } from "./types";
 
 export interface Trick {
   round: Round;
-  cards: (PlayCard | TrumpCard)[];
+  cards: PlayCard[];
 }
 
 export const getWinner = (trick: Trick): Player => {
-  let highCard: PlayCard | TrumpCard = trick.cards[0];
+  let highCard: PlayCard = trick.cards[0];
   for (const card of trick.cards) {
     if (card.suit === Suit.Rocket) {
       if (highCard.suit !== Suit.Rocket || card.value > highCard.value) {
