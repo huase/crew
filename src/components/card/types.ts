@@ -7,6 +7,7 @@ export enum Suit {
   Blue,
   Green,
   Yellow,
+  Rocket,
 }
 
 export enum CardState {
