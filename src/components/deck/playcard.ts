@@ -8,3 +8,20 @@ export interface PlayCard {
   state: CardState;
   clue?: Clue;
 }
+
+export const testCard = (
+  value: number,
+  suit: Suit,
+  playerId = -1,
+  state = CardState.Deck,
+  clue?: Clue
+): PlayCard => {
+  return {
+    value: value,
+    suit: suit,
+    type: CardType.Play,
+    playerId: playerId,
+    state: state,
+    clue: clue,
+  };
+};

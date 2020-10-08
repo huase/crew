@@ -1,5 +1,5 @@
-import { PlayCard } from "components/deck/playcard";
-import { Suit } from "components/deck/types";
+import { PlayCard } from "../deck/playcard";
+import { Suit } from "../deck/types";
 
 import { Round } from "./types";
 

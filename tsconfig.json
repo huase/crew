@@ -16,5 +16,5 @@
     "lib": ["es2018"]
   },
   "include": ["./src", "./typings"],
-  "exclude": []
+  "exclude": ["**/*.spec.ts"]
 }
