@@ -1,5 +1,4 @@
-import { PlayCard } from "components/deck/playcard";
-
+import { PlayCard } from "../deck/playcard";
 import { initPlayer, Player } from "../player/player";
 
 import { initMission, Mission } from "./mission";

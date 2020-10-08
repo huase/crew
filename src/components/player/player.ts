@@ -1,6 +1,6 @@
-import { PlayCard } from "components/deck/playcard";
-import { Task } from "components/game/task";
-import { Trick } from "components/game/trick";
+import { PlayCard } from "../deck/playcard";
+import { Task } from "../game/task";
+import { Trick } from "../game/trick";
 
 export interface Player {
   readonly playerId: number;

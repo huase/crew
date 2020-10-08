@@ -1,4 +1,4 @@
-import { TaskCard } from "components/deck/taskcard";
+import { TaskCard } from "../deck/taskcard";
 
 import { TaskToken } from "./token";
 
