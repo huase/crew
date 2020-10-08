@@ -8,6 +8,7 @@ import { GameState } from "./types";
 export interface Board {
   players: number[];
   playerMap: { [playerId: number]: Player };
+  numPlayers: number;
   mission: Mission;
   status: GameState;
   currentTrick?: Trick;
@@ -23,6 +24,7 @@ export const initBoard = (players: number[], missionId: number): Board => {
       },
       {}
     ),
+    numPlayers: players.length,
     mission: initMission(missionId),
     status: GameState.InProgress,
   };
