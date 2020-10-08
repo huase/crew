@@ -12,8 +12,13 @@
 - Download NodeJS from the NodeJS downloads page
 
 ## Setup
-
 - Run `git clone git@github.com:huase/crew.git`
 - Once cloned, run `cd crew/`
 - Run `npm install`
 - Run `npm start`
+
+## Testing
+- uses [ts-jest](https://www.npmjs.com/package/ts-jest) as testing framework
+- `npm t` to run all tests
+- `npm t -- <filename>` to test single file
+- `npm t -- -t '<testname>` to run single test
