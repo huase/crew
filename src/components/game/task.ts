@@ -1,10 +1,9 @@
-import { SmallCard } from "components/deck/small";
-import { Player } from "components/player/player";
+import { TaskCard } from "components/deck/taskcard";
 
 import { TaskToken } from "./token";
 
 export interface Task {
-  smallCard?: SmallCard;
+  taskCard?: TaskCard;
   taskToken?: TaskToken;
-  owner: Player;
+  playerId: number;
 }

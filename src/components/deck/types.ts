@@ -1,14 +1,7 @@
-import { NormalCard } from "./normal";
-import { SmallCard } from "./small";
-import { TrumpCard } from "./trump";
+import { PlayCard } from "./playcard";
+import { TaskCard } from "./taskcard";
 
-export type CardValue = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-
-export type TrumpValue = 1 | 2 | 3 | 4;
-
-export type PlayCard = NormalCard | TrumpCard;
-
-export type Card = PlayCard | SmallCard;
+export type Card = PlayCard | TaskCard;
 
 export enum Suit {
   Pink,
@@ -18,10 +11,16 @@ export enum Suit {
   Rocket,
 }
 
+export enum CardType {
+  Play,
+  Task,
+}
+
 export enum CardState {
+  Deck,
   Hand,
-  Table,
   Clue,
+  Played,
 }
 
 export enum Clue {
@@ -29,3 +28,12 @@ export enum Clue {
   Low,
   Only,
 }
+
+const printCard = (card: Card): string => {
+  return `${card.value}${Suit[card.suit]}`;
+};
+
+export const printCards = (cards: Card[]): string => {
+  const strCards = cards.map((card) => printCard(card));
+  return strCards.join(", ");
+};

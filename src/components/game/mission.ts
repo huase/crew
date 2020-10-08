@@ -1,7 +1,7 @@
 import { Task } from "./task";
 
 export interface Mission {
-  missionId: number;
+  readonly missionId: number;
   outstandingTasks: Task[];
   completedTasks: Task[];
 }

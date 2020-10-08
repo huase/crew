@@ -1,5 +1,5 @@
-import { PlayCard, Suit } from "components/deck/types";
-import { Player } from "components/player/player";
+import { PlayCard } from "components/deck/playcard";
+import { Suit } from "components/deck/types";
 
 import { Round } from "./types";
 
@@ -8,7 +8,7 @@ export interface Trick {
   cards: PlayCard[];
 }
 
-export const getWinner = (trick: Trick): Player => {
+export const trickWinner = (trick: Trick): number => {
   let highCard: PlayCard = trick.cards[0];
   for (const card of trick.cards) {
     if (card.suit === Suit.Rocket) {
@@ -21,5 +21,5 @@ export const getWinner = (trick: Trick): Player => {
       }
     }
   }
-  return highCard.owner;
+  return highCard.playerId;
 };

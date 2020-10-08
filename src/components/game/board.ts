@@ -6,7 +6,7 @@ import { Trick } from "./trick";
 import { GameState } from "./types";
 
 export interface Board {
-  players: Player[];
+  players: { [playerId: number]: Player };
   mission: Mission;
   status: GameState;
   currentTrick: Trick;
