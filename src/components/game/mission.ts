@@ -5,3 +5,11 @@ export interface Mission {
   outstandingTasks: Task[];
   completedTasks: Task[];
 }
+
+export const initMission = (missionId: number): Mission => {
+  return {
+    missionId: missionId,
+    outstandingTasks: [],
+    completedTasks: [],
+  };
+};

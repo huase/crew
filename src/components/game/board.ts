@@ -1,29 +1,46 @@
-import { Deck } from "components/deck/deck";
-import { Card } from "components/deck/types";
-import { Player } from "components/player/player";
+import { PlayCard } from "components/deck/playcard";
 
-import { Mission } from "./mission";
+import { initPlayer, Player } from "../player/player";
+
+import { initMission, Mission } from "./mission";
 import { Trick } from "./trick";
 import { GameState } from "./types";
 
 export interface Board {
-  players: { [playerId: number]: Player };
+  players: number[];
+  playerMap: { [playerId: number]: Player };
   mission: Mission;
   status: GameState;
-  currentTrick: Trick;
+  currentTrick?: Trick;
 }
 
-export const shuffleDeck = (deck: Deck): void => {
-  shuffleCards(deck.playCards);
-  shuffleCards(deck.taskCards);
-  deck.shuffled = true;
+export const initBoard = (players: number[], missionId: number): Board => {
+  return {
+    players: players,
+    playerMap: players.reduce(
+      (player: { [playerId: number]: Player }, playerId) => {
+        player[playerId] = initPlayer(playerId);
+        return player;
+      },
+      {}
+    ),
+    mission: initMission(missionId),
+    status: GameState.InProgress,
+  };
 };
 
-const shuffleCards = (cards: Card[]): void => {
-  for (let index = 0; index < cards.length; index++) {
-    const k: number = Math.floor(Math.random() * (index + 1)); //generate random number between 0 and index, inclusive
-    const temp: Card = cards[k];
-    cards[k] = cards[index];
-    cards[index] = temp;
-  }
+export const distributePlayCards = (board: Board): void => {
+  console.log(board);
+  throw new Error("Not implemented");
+};
+
+export const distributeTasks = (board: Board): void => {
+  console.log(board);
+  throw new Error("Not implemented");
+};
+
+export const getPlayableCards = (board: Board, player: Player): PlayCard => {
+  console.log(board);
+  console.log(player);
+  throw new Error("Not implemented");
 };

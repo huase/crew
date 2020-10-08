@@ -1,4 +1,4 @@
-import { CardState, CardType, Clue, Suit } from "./types";
+import { CardState, CardType, Clue, Suit } from "./card";
 
 export interface PlayCard {
   readonly value: number;
@@ -9,7 +9,7 @@ export interface PlayCard {
   clue?: Clue;
 }
 
-export const testCard = (
+export const initPlayCard = (
   value: number,
   suit: Suit,
   playerId = -1,

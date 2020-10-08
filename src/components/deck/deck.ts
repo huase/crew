@@ -1,36 +1,40 @@
-import { PlayCard } from "./playcard";
-import { TaskCard } from "./taskcard";
-import { CardState, CardType, printCards } from "./types";
+import { Card, printCards } from "./card";
+import { initPlayCard, PlayCard } from "./playcard";
+import { initTaskCard, TaskCard } from "./taskcard";
 
 export interface Deck {
   playCards: PlayCard[];
   taskCards: TaskCard[];
-  shuffled: boolean;
 }
 
-export const generateDeck = (): Deck => {
+export const initDeck = (): Deck => {
+  const deck: Deck = generateDeck();
+  shuffleCards(deck.playCards);
+  shuffleCards(deck.taskCards);
+  return deck;
+};
+
+const shuffleCards = (cards: Card[]): void => {
+  for (let index = 0; index < cards.length; index++) {
+    const k: number = Math.floor(Math.random() * (index + 1)); //generate random number between 0 and index, inclusive
+    const temp: Card = cards[k];
+    cards[k] = cards[index];
+    cards[index] = temp;
+  }
+};
+
+const generateDeck = (): Deck => {
   const playCards: PlayCard[] = [...Array(40).keys()].map((i) => {
-    return {
-      value: (i % 9) + 1,
-      suit: Math.floor(i / 9),
-      playerId: -1,
-      type: CardType.Play,
-      state: CardState.Deck,
-    };
+    return initPlayCard((i % 9) + 1, Math.floor(i / 9));
   });
 
   const taskCards: TaskCard[] = [...Array(36).keys()].map((i) => {
-    return {
-      value: (i % 9) + 1,
-      suit: Math.floor(i / 9),
-      type: CardType.Task,
-    };
+    return initTaskCard((i % 9) + 1, Math.floor(i / 9));
   });
 
   const deck: Deck = {
     playCards: playCards,
     taskCards: taskCards,
-    shuffled: false,
   };
 
   return deck;

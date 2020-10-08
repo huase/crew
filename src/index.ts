@@ -1,9 +1,7 @@
-import { Deck, generateDeck, printDeck } from "./components/deck/deck";
-import { shuffleDeck } from "./components/game/board";
+import { Deck, initDeck, printDeck } from "./components/deck/deck";
 
 function main(): void {
-  const deck: Deck = generateDeck();
-  shuffleDeck(deck);
+  const deck: Deck = initDeck();
   console.log(printDeck(deck));
 }
 
