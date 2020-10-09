@@ -1,5 +1,3 @@
-import { Board } from "components/game/board";
-
 import { Card, printCards } from "./card";
 import { initPlayCard, PlayCard } from "./playcard";
 import { initTaskCard, TaskCard } from "./taskcard";
@@ -46,12 +44,4 @@ export const printDeck = (deck: Deck): string => {
   const playCards: string = printCards(deck.playCards);
   const taskCards: string = printCards(deck.taskCards);
   return `Play Cards: ${playCards}\nTask Cards: ${taskCards}`;
-};
-
-export const dealPlayCards = (deck: Deck, board: Board): void => {
-  deck.playCards.forEach((card: PlayCard, index: number) => {
-    const currentPlayerId: number = board.players[index % board.numPlayers];
-    card.playerId = currentPlayerId;
-    board.playerMap[currentPlayerId].myCards.push(card);
-  });
 };
