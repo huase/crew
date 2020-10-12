@@ -28,3 +28,29 @@ export const validCards = (hand: Hand, suit: Suit): PlayCard[] => {
     return allCards(hand);
   }
 };
+
+export const removeCard = (hand: Hand, playCard: PlayCard): boolean => {
+  const cards: PlayCard[] | undefined = hand.get(playCard.suit);
+  if (cards === undefined) {
+    return false;
+  }
+
+  const i: number = cards.indexOf(playCard);
+  if (i > -1) {
+    cards.splice(i, 1);
+    return true;
+  } else {
+    return false;
+  }
+};
+
+export const cardFromString = (
+  hand: Hand,
+  card: string
+): PlayCard | undefined => {
+  const val: number = parseInt(card.charAt(0), 10);
+  const suit: Suit = Suit[card.substring(1) as keyof typeof Suit];
+  return hand.get(suit)?.find((playCard) => {
+    return playCard.value === val && playCard.suit === suit;
+  });
+};

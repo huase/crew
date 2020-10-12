@@ -29,7 +29,7 @@ export enum Clue {
   Only,
 }
 
-const printCard = (card: Card): string => {
+export const printCard = (card: Card): string => {
   return `${card.value}${Suit[card.suit]}`;
 };
 

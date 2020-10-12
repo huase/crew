@@ -1,12 +1,12 @@
-import { Suit } from "../deck/card";
+import { printCard, printCards, Suit } from "../deck/card";
 import { Deck, initDeck } from "../deck/deck";
-import { allCards, validCards } from "../deck/hand";
+import { allCards, removeCard, validCards } from "../deck/hand";
 import { isRocketFour, PlayCard } from "../deck/playcard";
 import { initPlayer, Player } from "../player/player";
 
 import { initMission, Mission, MissionId } from "./mission";
-import { initTrick, Trick } from "./trick";
-import { GameState, Round } from "./types";
+import { initTrick, Trick, trickWinner } from "./trick";
+import { GameState } from "./types";
 
 export interface Board {
   readonly players: Player[];
@@ -17,7 +17,8 @@ export interface Board {
   curPlayer: Player;
   mission: Mission;
   status: GameState;
-  round: Round;
+  round: number;
+  numRounds: number;
   tricks: Trick[];
 }
 
@@ -36,6 +37,7 @@ export const initBoard = (playerIds: number[], missionId: MissionId): Board => {
     mission: initMission(missionId),
     status: GameState.InProgress,
     round: 1,
+    numRounds: Math.floor(40 / players.length),
     tricks: [initTrick(1)],
   };
 };
@@ -80,18 +82,59 @@ export const getPlayableCards = (board: Board, player: Player): PlayCard[] => {
   if (player === board.leader) {
     return allCards(player.myCards);
   }
-  const leadSuit: Suit = board.tricks[board.round - 1].cards[0].suit;
+  const leadSuit: Suit = curTrick(board).cards[0].suit;
   return validCards(player.myCards, leadSuit);
 };
 
 export const playPlayCard = (board: Board, playCard: PlayCard): void => {
-  // TODO: do this
-  console.log(board);
-  console.log(playCard);
+  const player: Player = board.curPlayer;
+  if (!removeCard(player.myCards, playCard)) {
+    throw new Error("Internal error: card does not exist in player's hand");
+  }
+
+  console.log(`You played ${printCard(playCard)}!`);
+  const trick: Trick = curTrick(board);
+  trick.cards.push(playCard);
+  board.curPlayer = nextPlayer(board);
+
+  resolveTrick(board);
 };
 
 export const resolveTrick = (board: Board): void => {
+  const trick: Trick = curTrick(board);
+  if (trick.cards.length < board.numPlayers) {
+    return;
+  }
+
+  const winnerId: number = trickWinner(trick);
+  const winner: Player = getPlayer(board.players, winnerId);
+  winner.myTricks.push(trick);
+  console.log(
+    `Winner of trick ${board.round} [${printCards(
+      trick.cards
+    )}]: player ${winnerId}`
+  );
+
   board.round++;
-  board.tricks.push(initTrick(<Round>board.round));
-  // TODO: other stuff
+  board.tricks.push(initTrick(board.round));
+  board.leader = winner;
+  board.curPlayer = winner;
+
+  resolveGame(board);
+};
+
+export const resolveGame = (board: Board): void => {
+  if (board.round <= board.numRounds) {
+    return;
+  }
+  board.status = GameState.Success;
+};
+
+export const curTrick = (board: Board): Trick => {
+  return board.tricks[board.round - 1];
+};
+
+export const nextPlayer = (board: Board): Player => {
+  const index: number = board.players.indexOf(board.curPlayer);
+  return board.players[(index + 1) % board.numPlayers];
 };

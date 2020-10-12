@@ -1,14 +1,12 @@
 import { Suit } from "../deck/card";
 import { PlayCard } from "../deck/playcard";
 
-import { Round } from "./types";
-
 export interface Trick {
-  round: Round;
+  round: number;
   cards: PlayCard[];
 }
 
-export const initTrick = (round: Round): Trick => {
+export const initTrick = (round: number): Trick => {
   return {
     round: round,
     cards: [],
