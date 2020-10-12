@@ -1,10 +1,12 @@
+import { Suit } from "../deck/card";
 import { Deck, initDeck } from "../deck/deck";
+import { allCards, validCards } from "../deck/hand";
 import { isRocketFour, PlayCard } from "../deck/playcard";
 import { initPlayer, Player } from "../player/player";
 
 import { initMission, Mission, MissionId } from "./mission";
-import { Trick } from "./trick";
-import { GameState } from "./types";
+import { initTrick, Trick } from "./trick";
+import { GameState, Round } from "./types";
 
 export interface Board {
   readonly players: Player[];
@@ -15,7 +17,8 @@ export interface Board {
   curPlayer: Player;
   mission: Mission;
   status: GameState;
-  currentTrick?: Trick;
+  round: Round;
+  tricks: Trick[];
 }
 
 export const initBoard = (playerIds: number[], missionId: MissionId): Board => {
@@ -32,6 +35,8 @@ export const initBoard = (playerIds: number[], missionId: MissionId): Board => {
     curPlayer: commander,
     mission: initMission(missionId),
     status: GameState.InProgress,
+    round: 1,
+    tricks: [initTrick(1)],
   };
 };
 
@@ -55,21 +60,38 @@ export const getPlayer = (players: Player[], playerId: number): Player => {
  * @param deck shuffled deck
  * @param players list of Players
  */
-const dealPlayCards = (deck: Deck, players: Player[]): Player => {
-  let commander: Player = players[0];
+export const dealPlayCards = (deck: Deck, players: Player[]): Player => {
+  let commander: Player | undefined;
   deck.playCards.forEach((card: PlayCard, index: number) => {
     const player: Player = players[index % players.length];
     card.playerId = player.playerId;
-    player.myCards.push(card);
+    player.myCards.get(card.suit)?.push(card);
     if (isRocketFour(card)) {
       commander = player;
     }
   });
+  if (commander === undefined) {
+    throw new Error("Internal error: commander does not exist");
+  }
   return commander;
 };
 
-export const getPlayableCards = (board: Board, player: Player): PlayCard => {
+export const getPlayableCards = (board: Board, player: Player): PlayCard[] => {
+  if (player === board.leader) {
+    return allCards(player.myCards);
+  }
+  const leadSuit: Suit = board.tricks[board.round - 1].cards[0].suit;
+  return validCards(player.myCards, leadSuit);
+};
+
+export const playPlayCard = (board: Board, playCard: PlayCard): void => {
+  // TODO: do this
   console.log(board);
-  console.log(player);
-  throw new Error("Not implemented");
+  console.log(playCard);
+};
+
+export const resolveTrick = (board: Board): void => {
+  board.round++;
+  board.tricks.push(initTrick(<Round>board.round));
+  // TODO: other stuff
 };

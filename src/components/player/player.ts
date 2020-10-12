@@ -1,10 +1,10 @@
-import { PlayCard } from "../deck/playcard";
+import { Hand, initHand } from "../deck/hand";
 import { Task } from "../game/task";
 import { Trick } from "../game/trick";
 
 export interface Player {
   readonly playerId: number;
-  myCards: PlayCard[];
+  myCards: Hand;
   myTricks: Trick[];
   myTasks: Task[];
 }
@@ -12,7 +12,7 @@ export interface Player {
 export const initPlayer = (playerId: number): Player => {
   return {
     playerId: playerId,
-    myCards: [],
+    myCards: initHand(),
     myTricks: [],
     myTasks: [],
   };

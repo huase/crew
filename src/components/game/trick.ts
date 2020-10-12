@@ -8,6 +8,13 @@ export interface Trick {
   cards: PlayCard[];
 }
 
+export const initTrick = (round: Round): Trick => {
+  return {
+    round: round,
+    cards: [],
+  };
+};
+
 export const trickWinner = (trick: Trick): number => {
   let highCard: PlayCard = trick.cards[0];
   for (const card of trick.cards) {
