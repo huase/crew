@@ -21,5 +21,5 @@ export const initTask = (taskCard: TaskCard, playerId: number): Task => {
     taskCard: taskCard,
     playerId: playerId,
     taskState: TaskState.InProgressUnlocked,
-  }
-}
+  };
+};

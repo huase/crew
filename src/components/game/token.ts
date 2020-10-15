@@ -8,13 +8,12 @@ export enum TaskTokenNumber {
   Three,
   Four,
   Five,
-  Last
-
+  Last,
 }
 
 export enum TaskTokenCondition {
   Strict,
-  Relative
+  Relative,
 }
 
 export interface TaskToken {
@@ -29,5 +28,5 @@ export const initTaskToken = (
   return {
     taskTokenNumber: taskTokenNumber,
     taskTokenCondition: taskTokenCondition,
-  }
-}
+  };
+};

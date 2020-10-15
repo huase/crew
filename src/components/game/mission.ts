@@ -1,6 +1,7 @@
 import { Deck } from "components/deck/deck";
 import { TaskCard } from "components/deck/taskcard";
 import { Player } from "components/player/player";
+
 import { initTask, Task } from "./task";
 
 export enum MissionId {
@@ -33,16 +34,24 @@ export const initMission = (missionId: MissionId): Mission => {
   };
 };
 
-export const drawTaskCards = (numberOfTaskCards: number, deck: Deck, mission: Mission): void => {
-  for (let i: number = 0; i < numberOfTaskCards; i++) {
+export const drawTaskCards = (
+  numberOfTaskCards: number,
+  deck: Deck,
+  mission: Mission
+): void => {
+  for (let i = 0; i < numberOfTaskCards; i++) {
     mission.unassignedTaskCards.push(deck.taskCards[i]);
   }
-}
+};
 
-export const pickTaskCards = (player: Player, taskCard: TaskCard, mission: Mission): boolean => {
+export const pickTaskCards = (
+  player: Player,
+  taskCard: TaskCard,
+  mission: Mission
+): boolean => {
   const availableTaskCards: TaskCard[] = mission.unassignedTaskCards;
   const i: number = availableTaskCards.indexOf(taskCard);
-  
+
   if (i > -1) {
     availableTaskCards.splice(i, 1);
     const newTask: Task = initTask(taskCard, player.playerId);
@@ -52,4 +61,4 @@ export const pickTaskCards = (player: Player, taskCard: TaskCard, mission: Missi
   } else {
     return false;
   }
-}
+};
