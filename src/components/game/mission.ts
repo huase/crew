@@ -85,10 +85,21 @@ export const resolveTasks = (trick: Trick, mission: Mission): boolean => {
         } else {
           task.taskState = TaskState.Success;
           mission.outstandingTasks.splice(taskIndex, 1);
+          updateMissionSuccess(mission);
           mission.completedTasks.push(task);
         }
       }
     }
   }
   return true;
+};
+
+export const updateMissionSuccess = (mission: Mission): void => {
+  if (mission.outstandingTasks.length === 0) {
+    mission.missionState = MissionState.Success;
+  }
+};
+
+export const checkMissionSuccess = (mission: Mission): boolean => {
+  return mission.missionState === MissionState.Success;
 };
