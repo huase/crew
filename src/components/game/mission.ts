@@ -2,7 +2,7 @@ import { Deck } from "components/deck/deck";
 import { TaskCard } from "components/deck/taskcard";
 import { Player } from "components/player/player";
 
-import { initTask, matchTaskToPlayCard, Task, TaskState } from "./task";
+import { initTask, Task, TaskState } from "./task";
 import { Trick, trickWinner } from "./trick";
 
 export enum MissionId {
@@ -56,6 +56,7 @@ export const pickTaskCards = (
   if (i > -1) {
     availableTaskCards.splice(i, 1);
     const newTask: Task = initTask(taskCard, player.playerId);
+    taskCard.task = newTask;
     player.myTasks.push(newTask);
     mission.outstandingTasks.push(newTask);
     return true;
@@ -73,21 +74,21 @@ export const pickTaskCards = (
 export const resolveTasks = (trick: Trick, mission: Mission): boolean => {
   const trickWinnerId: number = trickWinner(trick);
   for (const playCard of trick.cards) {
-    for (const [taskIndex, task] of mission.outstandingTasks.entries()) {
-      if (matchTaskToPlayCard(task, playCard)) {
-        if (
-          trickWinnerId !== task.playerId ||
-          task.taskState === TaskState.InProgressLocked
-        ) {
-          task.taskState = TaskState.Failure;
-          mission.missionState = MissionState.Failure;
-          return false;
-        } else {
-          task.taskState = TaskState.Success;
-          mission.outstandingTasks.splice(taskIndex, 1);
-          updateMissionSuccess(mission);
-          mission.completedTasks.push(task);
-        }
+    if (playCard.taskCard && playCard.taskCard.task) {
+      const task = playCard.taskCard.task;
+      if (
+        trickWinnerId !== task.playerId ||
+        task.taskState === TaskState.InProgressLocked
+      ) {
+        task.taskState = TaskState.Failure;
+        mission.missionState = MissionState.Failure;
+        return false;
+      } else {
+        task.taskState = TaskState.Success;
+        const taskIndex: number = mission.outstandingTasks.indexOf(task);
+        mission.outstandingTasks.splice(taskIndex, 1);
+        updateMissionSuccess(mission);
+        mission.completedTasks.push(task);
       }
     }
   }

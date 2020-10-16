@@ -1,5 +1,3 @@
-import { PlayCard } from "components/deck/playcard";
-
 import { TaskCard } from "../deck/taskcard";
 
 import { TaskToken } from "./token";
@@ -24,14 +22,4 @@ export const initTask = (taskCard: TaskCard, playerId: number): Task => {
     playerId: playerId,
     taskState: TaskState.InProgressUnlocked,
   };
-};
-
-export const matchTaskToPlayCard = (
-  task: Task,
-  playCard: PlayCard
-): boolean => {
-  return (
-    playCard.value === task.taskCard?.value &&
-    playCard.suit === task.taskCard?.suit
-  );
 };

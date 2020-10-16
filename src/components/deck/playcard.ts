@@ -1,4 +1,5 @@
 import { CardState, CardType, Clue, Suit } from "./card";
+import { TaskCard } from "./taskcard";
 
 export interface PlayCard {
   readonly value: number;
@@ -7,6 +8,7 @@ export interface PlayCard {
   playerId: number;
   state: CardState;
   clue?: Clue;
+  taskCard?: TaskCard;
 }
 
 export const initPlayCard = (
@@ -14,7 +16,8 @@ export const initPlayCard = (
   suit: Suit,
   playerId = -1,
   state = CardState.Deck,
-  clue?: Clue
+  clue?: Clue,
+  taskCard?: TaskCard
 ): PlayCard => {
   return {
     value: value,
@@ -23,6 +26,7 @@ export const initPlayCard = (
     playerId: playerId,
     state: state,
     clue: clue,
+    taskCard: taskCard,
   };
 };
 

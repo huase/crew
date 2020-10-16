@@ -32,6 +32,10 @@ const generateDeck = (): Deck => {
     return initTaskCard((i % 9) + 1, Math.floor(i / 9));
   });
 
+  taskCards.forEach((taskCard: TaskCard, index: number) => {
+    playCards[index].taskCard = taskCard;
+  });
+
   const deck: Deck = {
     playCards: playCards,
     taskCards: taskCards,
